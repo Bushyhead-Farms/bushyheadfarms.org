@@ -15,7 +15,6 @@
             background-color: #f9f9f9;
         }
 
-        /* Container styles */
         .container {
             max-width: 800px;
             margin: 40px auto;
@@ -25,7 +24,6 @@
             border-radius: 8px;
         }
 
-        /* Heading styles */
         h1, h2 {
             text-align: center;
             margin-bottom: 20px;
@@ -43,7 +41,6 @@
             font-size: 1.8rem;
         }
 
-        /* Text styles */
         p {
             font-size: 1rem;
             text-align: center;
@@ -51,7 +48,6 @@
             color: #555;
         }
 
-        /* List styles */
         ul {
             list-style-type: none;
             padding: 0;
@@ -68,12 +64,73 @@
             color: #444;
         }
 
-        /* Footer styles */
-        footer {
+        .thumbnails {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .thumbnails img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            cursor: pointer;
+            border: 2px solid transparent;
+            border-radius: 4px;
+            transition: transform 0.2s, border 0.2s;
+        }
+
+        .thumbnails img:hover {
+            transform: scale(1.1);
+            border-color: #444;
+        }
+
+        #viewer {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            z-index: 1000;
             text-align: center;
-            margin-top: 40px;
-            font-size: 0.9rem;
-            color: #888;
+        }
+
+        #viewer img {
+            max-width: 90%;
+            max-height: 80vh;
+            border-radius: 4px;
+        }
+
+        #viewer button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #444;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        #viewer button:hover {
+            background: #555;
+        }
+
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 999;
         }
     </style>
 </head>
@@ -81,9 +138,7 @@
     <div class="container">
         <h1>Welcome to the Family</h1>
         <h2>Leave your shoes and sanity at the door.</h2>
-        <p>
-            I'll add something here, when I have something to say.
-        </p>
+        <p>I'll add something here, when I have something to say.</p>
         <h2>Important Dates</h2>
         <ul>
             <li><strong>January 20, 2025:</strong> NCAA and President</li>
@@ -91,9 +146,37 @@
             <li><strong>January 28, 2025:</strong> Steve's Celebration</li>
             <li><strong>January 28, 2025:</strong> Skiatook Pig Show</li>
         </ul>
+
+        <h2>Gallery</h2>
+        <div class="thumbnails">
+            <img src="image1.jpg" alt="Thumbnail 1" onclick="showViewer('image1.jpg')">
+            <img src="image2.jpg" alt="Thumbnail 2" onclick="showViewer('image2.jpg')">
+            <img src="image3.jpg" alt="Thumbnail 3" onclick="showViewer('image3.jpg')">
+            <img src="image4.jpg" alt="Thumbnail 4" onclick="showViewer('image4.jpg')">
+        </div>
     </div>
+
+    <div id="overlay" onclick="hideViewer()"></div>
+    <div id="viewer">
+        <img src="" alt="Viewer Image" id="viewer-image">
+        <button onclick="hideViewer()">Close</button>
+    </div>
+
     <footer>
         &copy; 2025 Bushyhead Farms. All rights reserved.
     </footer>
+
+    <script>
+        function showViewer(imageSrc) {
+            document.getElementById('viewer-image').src = imageSrc;
+            document.getElementById('viewer').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+        }
+
+        function hideViewer() {
+            document.getElementById('viewer').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+    </script>
 </body>
 </html>
